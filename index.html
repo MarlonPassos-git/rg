@@ -50,12 +50,7 @@
         .container {
             position: relative;
             z-index: 1;
-            background: rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(10px);
-            border-radius: 15px;
             padding: 20px 30px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.2);
         }
         
         h1 {
@@ -78,9 +73,9 @@
         #seconds-display {
             font-size: 3.5em;
             font-weight: 600;
-            margin: 0;
+            margin: 10px 0;
             display: inline-block;
-            padding: 20px 40px;
+            padding: 15px 30px;
             border: 3px solid rgba(255, 255, 255, 0.4);
             border-radius: 12px;
             background: linear-gradient(135deg, rgba(255, 107, 129, 0.25), rgba(255, 182, 193, 0.25));
@@ -92,8 +87,8 @@
         small {
             color: rgba(255, 255, 255, 0.8);
             display: block;
-            margin-top: 8px;
-            font-size: 0.8em;
+            margin-top: 12px;
+            font-size: 0.85em;
             font-weight: 300;
             letter-spacing: 0.5px;
         }
@@ -133,7 +128,8 @@
     <div class="heart-bg" style="top: 60%; right: 5%; animation-delay: 3s;">💓</div>
     
     <div class="container">
-        <div id="seconds-display">0<small>Desde: 15/10/2025 às 00:32:00</small></div>
+        <div id="seconds-display">0</div>
+        <small>Desde: 15/10/2025 a 00:32:00</small>
     </div>
 
     <script>
