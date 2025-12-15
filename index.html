@@ -50,7 +50,9 @@
         .container {
             position: relative;
             z-index: 1;
-            padding: 20px 30px;
+            width: 100%;
+            max-width: 350px;
+            padding: clamp(10px, 5%, 20px) clamp(15px, 8%, 30px);
         }
         
         h1 {
@@ -71,30 +73,30 @@
         }
         
         #seconds-display {
-            font-size: 3.5em;
+            font-size: clamp(1.5rem, 12vw, 3.5rem);
             font-weight: 600;
             font-family: 'Courier New', monospace;
             font-variant-numeric: tabular-nums;
-            margin: 10px 0;
+            margin: clamp(5px, 3%, 10px) 0;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            padding: 15px 30px;
-            border: 3px solid rgba(255, 255, 255, 0.4);
-            border-radius: 12px;
+            padding: clamp(10px, 5%, 15px) clamp(20px, 10%, 30px);
+            border: clamp(2px, 0.5%, 3px) solid rgba(255, 255, 255, 0.4);
+            border-radius: clamp(8px, 3%, 12px);
             background: linear-gradient(135deg, rgba(255, 107, 129, 0.25), rgba(255, 182, 193, 0.25));
-            box-shadow: 0 8px 25px rgba(255, 107, 129, 0.3);
+            box-shadow: 0 clamp(5px, 2%, 8px) clamp(15px, 5%, 25px) rgba(255, 107, 129, 0.3);
             position: relative;
             overflow: hidden;
-            min-width: 280px;
-            min-height: 110px;
+            min-width: clamp(75px, 100%, 280px);
+            min-height: clamp(50px, 20vw, 110px);
         }
         
         small {
             color: rgba(255, 255, 255, 0.8);
             display: block;
-            margin-top: 12px;
-            font-size: 0.85em;
+            margin-top: clamp(6px, 3%, 12px);
+            font-size: clamp(0.65rem, 2vw, 0.85rem);
             font-weight: 300;
             letter-spacing: 0.5px;
         }
