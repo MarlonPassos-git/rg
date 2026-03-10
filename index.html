@@ -1,201 +1,663 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
-    <title>Nosso Amor em Segundos 💕</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Nosso Amor no Tempo 💕</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;600&display=swap');
-        
+        @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;600&display=swap');
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+            /* Remove highlight no mobile */
         }
-        
+
         body {
             font-family: 'Poppins', sans-serif;
             text-align: center;
-            padding: clamp(15px, 5vh, 30px) clamp(5px, 2vw, 20px);
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            background: linear-gradient(-45deg, #667eea, #764ba2, #ff758c, #ff7eb3);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
             color: white;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            overflow: hidden;
+            overflow-x: hidden;
+            /* Previne rolagem horizontal */
             position: relative;
+            padding: 20px 10px;
         }
-        
+
+        @keyframes gradientBG {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
         /* Corações flutuantes de fundo */
         .heart-bg {
             position: absolute;
-            font-size: 30px;
-            opacity: 0.15;
-            animation: float 15s infinite;
+            font-size: clamp(20px, 5vw, 40px);
+            opacity: 0.1;
+            animation: float 20s infinite linear;
             pointer-events: none;
+            z-index: 0;
         }
-        
+
         @keyframes float {
-            0%, 100% {
-                transform: translateY(0) rotate(0deg);
-                opacity: 0.15;
+            0% {
+                transform: translateY(100vh) rotate(0deg) scale(0.8);
+                opacity: 0;
             }
-            50% {
-                transform: translateY(-100px) rotate(180deg);
-                opacity: 0.3;
+
+            10% {
+                opacity: 0.2;
+            }
+
+            90% {
+                opacity: 0.2;
+            }
+
+            100% {
+                transform: translateY(-20vh) rotate(360deg) scale(1.2);
+                opacity: 0;
             }
         }
-        
+
         .container {
             position: relative;
             z-index: 1;
             width: 100%;
-            max-width: 350px;
-            padding: clamp(8px, 3%, 20px) clamp(5px, 2%, 30px);
-            margin: 0 auto;
+            max-width: 700px;
+            padding: 30px 15px;
+            border-radius: 24px;
+            /* Glassmorphism Effect */
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.15);
+            animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        
-        h1 {
+
+        @keyframes slideUp {
+            0% {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .title {
+            font-family: 'Pacifico', cursive;
+            font-size: clamp(2.2rem, 8vw, 3.5rem);
+            margin-bottom: 20px;
+            text-shadow: 2px 4px 8px rgba(0, 0, 0, 0.2);
+            line-height: 1.2;
+            background: linear-gradient(to right, #fff, #ffe2e2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .toggle-container {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 25px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .toggle-btn {
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: clamp(0.85rem, 3vw, 1rem);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            flex: 1 1 auto;
+            /* Cresce em telas pequenas */
+            max-width: max-content;
+        }
+
+        .toggle-btn:hover,
+        .toggle-btn:active {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-2px);
+        }
+
+        .toggle-btn.active {
+            background: white;
+            color: #ff758c;
+            box-shadow: 0 6px 20px rgba(255, 117, 140, 0.4);
+            border-color: transparent;
+        }
+
+        /* Oculta scrollbar mas permite rolar */
+        .format-tabs-wrapper {
+            width: 100%;
+            overflow-x: auto;
+            scrollbar-width: none;
+            /* Firefox */
+            margin-bottom: 25px;
+            padding-bottom: 5px;
+            /* Espaço pro shadow não cortar */
+        }
+
+        .format-tabs-wrapper::-webkit-scrollbar {
             display: none;
+            /* Chrome/Safari */
         }
-        
-        @keyframes pulse {
-            0%, 100% {
+
+        .format-tabs {
+            display: inline-flex;
+            justify-content: center;
+            gap: 8px;
+            white-space: nowrap;
+            padding: 0 5px;
+        }
+
+        @media (max-width: 600px) {
+            .format-tabs {
+                justify-content: flex-start;
+                /* Permite rolagem bonita no mobile */
+            }
+        }
+
+        .format-btn {
+            background: rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: rgba(255, 255, 255, 0.9);
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 400;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.2s ease;
+        }
+
+        .format-btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .format-btn.active {
+            background: rgba(255, 255, 255, 0.9);
+            color: #764ba2;
+            font-weight: 600;
+            border-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .time-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: clamp(10px, 3vw, 20px);
+            margin-bottom: 20px;
+            perspective: 1000px;
+        }
+
+        @media (max-width: 480px) {
+            .time-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .single-time-container {
+            display: none;
+            justify-content: center;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+
+        .time-box {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 16px;
+            padding: clamp(15px, 4vw, 25px) clamp(10px, 2vw, 15px);
+            box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.1), 0 4px 15px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            animation: fadeIn 0.5s ease backwards;
+        }
+
+        /* Animação em cascata para os cards */
+        .time-box:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .time-box:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .time-box:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+
+        .time-box:nth-child(4) {
+            animation-delay: 0.4s;
+        }
+
+        .time-box:nth-child(5) {
+            animation-delay: 0.5s;
+        }
+
+        .time-box:nth-child(6) {
+            animation-delay: 0.6s;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.9) translateY(20px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .time-box:hover {
+            transform: scale(1.05) translateY(-5px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .single-box {
+            width: 100%;
+            max-width: 500px;
+            padding: clamp(40px, 8vw, 60px) 20px;
+            animation: pulseIn 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        @keyframes pulseIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+
+            50% {
+                transform: scale(1.02);
+            }
+
+            100% {
+                opacity: 1;
                 transform: scale(1);
             }
-            50% {
-                transform: scale(1.05);
-            }
         }
-        
-        .hearts-decoration {
-            display: none;
-        }
-        
-        #seconds-display {
-            font-size: clamp(1.5rem, 12vw, 3.5rem);
+
+        .time-value {
+            font-size: clamp(2rem, 8vw, 3.5rem);
             font-weight: 600;
             font-family: 'Courier New', monospace;
             font-variant-numeric: tabular-nums;
-            margin: clamp(5px, 3%, 10px) 0;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: clamp(10px, 5%, 15px) clamp(20px, 10%, 30px);
-            border: clamp(2px, 0.5%, 3px) solid rgba(255, 255, 255, 0.4);
-            border-radius: clamp(8px, 3%, 12px);
-            background: linear-gradient(135deg, rgba(255, 107, 129, 0.25), rgba(255, 182, 193, 0.25));
-            box-shadow: 0 clamp(5px, 2%, 8px) clamp(15px, 5%, 25px) rgba(255, 107, 129, 0.3);
-            position: relative;
-            overflow: hidden;
-            min-width: clamp(75px, 100%, 280px);
-            min-height: clamp(50px, 20vw, 110px);
+            text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
+            line-height: 1;
         }
-        
-        small {
-            color: rgba(255, 255, 255, 0.8);
-            display: block;
-            margin-top: clamp(6px, 3%, 12px);
-            font-size: clamp(0.65rem, 2vw, 0.85rem);
+
+        .single-box .time-value {
+            font-size: clamp(3rem, 10vw, 5rem);
+        }
+
+        .time-label {
+            font-size: clamp(0.75rem, 3vw, 0.9rem);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            opacity: 0.85;
+            margin-top: 8px;
+            font-weight: 400;
+        }
+
+        .single-box .time-label {
+            font-size: clamp(1.2rem, 4vw, 1.8rem);
+            margin-top: 20px;
+            opacity: 0.9;
+        }
+
+        .date-label {
+            display: inline-block;
+            background: rgba(0, 0, 0, 0.15);
+            padding: 8px 16px;
+            border-radius: 20px;
+            color: rgba(255, 255, 255, 0.9);
+            margin-top: 15px;
+            font-size: clamp(0.75rem, 2.5vw, 0.9rem);
             font-weight: 300;
-            letter-spacing: 0.5px;
+            letter-spacing: 1px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
-        
-        .subtitle {
-            display: none;
-        }
-        
-        /* Partículas de coração */
+
+        /* Partículas de coração (Clique) */
         .heart-particle {
-            position: absolute;
-            font-size: 20px;
-            animation: particleFloat 4s ease-in forwards;
+            position: fixed;
+            font-size: 24px;
+            animation: floatUpAndFade 3s ease-out forwards;
             pointer-events: none;
             z-index: 100;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
         }
-        
-        @keyframes particleFloat {
+
+        @keyframes floatUpAndFade {
             0% {
-                transform: translateY(0) scale(1);
-                opacity: 1;
+                transform: translateY(0) scale(0.5) rotate(0deg);
+                opacity: 0;
             }
+
+            20% {
+                opacity: 1;
+                transform: scale(1.2) rotate(-10deg);
+            }
+
             100% {
-                transform: translateY(-200px) scale(0.5);
+                transform: translateY(-150px) scale(1) rotate(20deg);
                 opacity: 0;
             }
         }
-        
-        .seconds-label {
-            font-size: 0.6em;
-            opacity: 0.7;
-            margin-left: 8px;
-            vertical-align: super;
-        }
     </style>
 </head>
+
 <body>
-    <!-- Corações de fundo -->
-    <div class="heart-bg" style="top: 10%; left: 10%;">💕</div>
-    <div class="heart-bg" style="top: 20%; right: 15%; animation-delay: 2s;">❤️</div>
-    <div class="heart-bg" style="bottom: 20%; left: 20%; animation-delay: 4s;">💖</div>
-    <div class="heart-bg" style="bottom: 30%; right: 10%; animation-delay: 6s;">💗</div>
-    <div class="heart-bg" style="top: 50%; left: 5%; animation-delay: 1s;">💝</div>
-    <div class="heart-bg" style="top: 60%; right: 5%; animation-delay: 3s;">💓</div>
-    
+    <!-- Corações de fundo gerados pelo JS agora para melhor controle -->
+    <div id="bg-hearts-container"></div>
+
     <div class="container">
-        <div id="seconds-display">0</div>
-        <small>Desde: 15/10/2025 a 00:32:00</small>
+        <h2 class="title">Nosso Tempo Juntos</h2>
+
+        <div class="toggle-container">
+            <button class="toggle-btn active" onclick="setMode('namoro')" id="btn-namoro">Tempo de Namoro</button>
+            <button class="toggle-btn" onclick="setMode('conhecer')" id="btn-conhecer">Do nosso 1º Oi!</button>
+        </div>
+
+        <div class="format-tabs-wrapper">
+            <div class="format-tabs">
+                <button class="format-btn active" onclick="setFormat('all', this)">Detalhado</button>
+                <button class="format-btn" onclick="setFormat('months', this)">Meses</button>
+                <button class="format-btn" onclick="setFormat('weeks', this)">Semanas</button>
+                <button class="format-btn" onclick="setFormat('days', this)">Dias</button>
+                <button class="format-btn" onclick="setFormat('hours', this)">Horas</button>
+                <button class="format-btn" onclick="setFormat('minutes', this)">Minutos</button>
+                <button class="format-btn" onclick="setFormat('seconds', this)">Segundos</button>
+            </div>
+        </div>
+
+        <!-- Visão Detalhada -->
+        <div id="display-all" class="time-container">
+            <div class="time-box">
+                <div class="time-value" id="val-years">0</div>
+                <div class="time-label">Anos</div>
+            </div>
+            <div class="time-box">
+                <div class="time-value" id="val-months">0</div>
+                <div class="time-label">Meses</div>
+            </div>
+            <div class="time-box">
+                <div class="time-value" id="val-days">0</div>
+                <div class="time-label">Dias</div>
+            </div>
+            <div class="time-box">
+                <div class="time-value" id="val-hours">00</div>
+                <div class="time-label">Horas</div>
+            </div>
+            <div class="time-box">
+                <div class="time-value" id="val-minutes">00</div>
+                <div class="time-label">Minutos</div>
+            </div>
+            <div class="time-box">
+                <div class="time-value" id="val-seconds">00</div>
+                <div class="time-label">Segundos</div>
+            </div>
+        </div>
+
+        <!-- Visão Única (Total) -->
+        <div id="display-single" class="single-time-container">
+            <div class="time-box single-box">
+                <div class="time-value" id="val-single">0</div>
+                <div class="time-label" id="label-single">Dias</div>
+            </div>
+        </div>
+
+        <div class="date-label" id="date-label">Desde: 15/10/2025</div>
     </div>
 
     <script>
-        // Data inicial: 15 de Outubro de 2025, 00:32:00
-        const START_DATE = new Date(2025, 9, 15, 0, 32, 0); 
-        let previousSeconds = 0;
-        
-        function updateSecondsCounter() {
-            const now = new Date();
-            const diffInMilliseconds = now.getTime() - START_DATE.getTime(); 
-            const totalSeconds = Math.floor(diffInMilliseconds / 1000); 
-            
-            // Adiciona animação ao número
-            const display = document.getElementById('seconds-display');
-            const formattedNumber = totalSeconds.toLocaleString('pt-BR');
-            
-            // Anima cada dígito individualmente
-            display.innerHTML = formattedNumber
-                .split('')
-                .map((char, index) => `<span class="number" style="animation-delay: ${index * 0.05}s">${char}</span>`)
-                .join('') + '<span class="seconds-label">s</span>';
-            
-            // Cria partícula de coração quando o número muda
-            if (totalSeconds !== previousSeconds && totalSeconds % 10 === 0) {
-                createHeartParticle();
+        // Defina aqui as datas importantes
+        const DATES = {
+            namoro: {
+                date: new Date(2025, 9, 15, 0, 32, 0), // 15 de Outubro de 2025
+                label: "Início do Namoro: 15/10/2025"
+            },
+            conhecer: {
+                date: new Date(2025, 7, 5, 0, 0, 0), // 5 de agosto de 2025
+                label: "Nosso 1º Oi: 05/08/2025"
             }
-            
-            previousSeconds = totalSeconds;
+        };
+
+        let currentMode = 'namoro';
+        let currentFormat = 'all';
+
+        function setMode(mode) {
+            // Efeito visual ao trocar (pequena vibração na interface)
+            if (currentMode !== mode) {
+                if (window.navigator && window.navigator.vibrate) {
+                    navigator.vibrate(50); // Haptic feedback no mobile
+                }
+
+                // Reinicia a animação dos cards
+                const boxes = document.querySelectorAll('.time-box');
+                boxes.forEach(box => {
+                    box.style.animation = 'none';
+                    box.offsetHeight; // Trigger reflow
+                    box.style.animation = null;
+                });
+            }
+
+            currentMode = mode;
+
+            // Atualiza botões
+            document.getElementById('btn-namoro').classList.remove('active');
+            document.getElementById('btn-conhecer').classList.remove('active');
+            document.getElementById(`btn-${mode}`).classList.add('active');
+
+            // Atualiza o texto da data
+            document.getElementById('date-label').innerText = DATES[mode].label;
+
+            // Força atualização imediata
+            updateTimeCounter();
+            createHeartParticleAtCenter();
         }
-        
-        function createHeartParticle() {
-            const hearts = ['💕', '❤️', '💖', '💗', '💝', '💓'];
+
+        function setFormat(format, btn) {
+            if (currentFormat !== format) {
+                if (window.navigator && window.navigator.vibrate) {
+                    navigator.vibrate(30);
+                }
+            }
+
+            currentFormat = format;
+
+            // Atualiza botões de formato
+            const btns = document.querySelectorAll('.format-btn');
+            btns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            // Alterna visibilidade com delay para animação fluir
+            if (format === 'all') {
+                document.getElementById('display-single').style.display = 'none';
+                document.getElementById('display-all').style.display = 'grid';
+
+                // Reinicia animações
+                document.querySelectorAll('#display-all .time-box').forEach(box => {
+                    box.style.animation = 'none';
+                    box.offsetHeight;
+                    box.style.animation = null;
+                });
+            } else {
+                document.getElementById('display-all').style.display = 'none';
+                document.getElementById('display-single').style.display = 'flex';
+
+                const singleBox = document.querySelector('.single-box');
+                singleBox.style.animation = 'none';
+                singleBox.offsetHeight;
+                singleBox.style.animation = null;
+            }
+
+            updateTimeCounter();
+        }
+
+        function updateTimeCounter() {
+            const now = new Date();
+            const startDate = DATES[currentMode].date;
+
+            // Tratamento caso a data atual seja anterior à data inicial
+            if (now < startDate) {
+                if (currentFormat === 'all') {
+                    document.getElementById('val-years').innerText = "0";
+                    document.getElementById('val-months').innerText = "0";
+                    document.getElementById('val-days').innerText = "0";
+                    document.getElementById('val-hours').innerText = "00";
+                    document.getElementById('val-minutes').innerText = "00";
+                    document.getElementById('val-seconds').innerText = "00";
+                } else {
+                    document.getElementById('val-single').innerText = "0";
+                }
+                return;
+            }
+
+            if (currentFormat === 'all') {
+                // Modo detalhado
+                let years = now.getFullYear() - startDate.getFullYear();
+                let months = now.getMonth() - startDate.getMonth();
+                let days = now.getDate() - startDate.getDate();
+
+                let hours = now.getHours() - startDate.getHours();
+                let minutes = now.getMinutes() - startDate.getMinutes();
+                let seconds = now.getSeconds() - startDate.getSeconds();
+
+                if (seconds < 0) { seconds += 60; minutes--; }
+                if (minutes < 0) { minutes += 60; hours--; }
+                if (hours < 0) { hours += 24; days--; }
+                if (days < 0) {
+                    const prevMonth = new Date(now.getFullYear(), now.getMonth(), 0);
+                    days += prevMonth.getDate();
+                    months--;
+                }
+                if (months < 0) { months += 12; years--; }
+
+                document.getElementById('val-years').innerText = years;
+                document.getElementById('val-months').innerText = months;
+                document.getElementById('val-days').innerText = days;
+                document.getElementById('val-hours').innerText = hours.toString().padStart(2, '0');
+                document.getElementById('val-minutes').innerText = minutes.toString().padStart(2, '0');
+                document.getElementById('val-seconds').innerText = seconds.toString().padStart(2, '0');
+            } else {
+                // Modo valor único total
+                const diffMs = now.getTime() - startDate.getTime();
+                let value = 0;
+                let label = '';
+
+                if (currentFormat === 'months') {
+                    value = (now.getFullYear() - startDate.getFullYear()) * 12 + (now.getMonth() - startDate.getMonth());
+                    if (now.getDate() < startDate.getDate()) value--;
+                    label = value === 1 ? 'Mês' : 'Meses';
+                } else if (currentFormat === 'weeks') {
+                    value = Math.floor(diffMs / (1000 * 60 * 60 * 24 * 7));
+                    label = value === 1 ? 'Semana' : 'Semanas';
+                } else if (currentFormat === 'days') {
+                    value = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+                    label = value === 1 ? 'Dia' : 'Dias';
+                } else if (currentFormat === 'hours') {
+                    value = Math.floor(diffMs / (1000 * 60 * 60));
+                    label = value === 1 ? 'Hora' : 'Horas';
+                } else if (currentFormat === 'minutes') {
+                    value = Math.floor(diffMs / (1000 * 60));
+                    label = value === 1 ? 'Minuto' : 'Minutos';
+                } else if (currentFormat === 'seconds') {
+                    value = Math.floor(diffMs / 1000);
+                    label = value === 1 ? 'Segundo' : 'Segundos';
+                }
+
+                document.getElementById('val-single').innerText = value.toLocaleString('pt-BR');
+                document.getElementById('label-single').innerText = label;
+            }
+        }
+
+        // Efeito de partícula extra ao mudar de modo
+        function createHeartParticleAtCenter() {
+            const hearts = ['💕', '💖', '💗', '💝'];
+            for (let i = 0; i < 3; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.className = 'heart-particle';
+                    heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+                    heart.style.left = (40 + Math.random() * 20) + '%';
+                    heart.style.top = (40 + Math.random() * 20) + '%';
+                    document.body.appendChild(heart);
+                    setTimeout(() => heart.remove(), 3000);
+                }, i * 200);
+            }
+        }
+
+        // Criar corações de fundo dinamicamente
+        function initBackgroundHearts() {
+            const container = document.getElementById('bg-hearts-container');
+            const hearts = ['💕', '❤️', '💖', '💗', '💝', '💓', '✨'];
+
+            for (let i = 0; i < 10; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart-bg';
+                heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDelay = (Math.random() * 20) + 's';
+                heart.style.animationDuration = (15 + Math.random() * 15) + 's';
+                container.appendChild(heart);
+            }
+        }
+
+        // Interatividade: Criar corações onde o usuário clica/toca na tela
+        document.body.addEventListener('click', function (e) {
+            // Não cria se clicou em um botão
+            if (e.target.tagName === 'BUTTON') return;
+
             const heart = document.createElement('div');
             heart.className = 'heart-particle';
-            heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
-            heart.style.left = Math.random() * 100 + '%';
-            heart.style.top = Math.random() * 100 + '%';
+            heart.textContent = '❤️';
+            heart.style.left = (e.clientX - 12) + 'px';
+            heart.style.top = (e.clientY - 12) + 'px';
             document.body.appendChild(heart);
-            
-            setTimeout(() => heart.remove(), 4000);
-        }
-        
-        // Inicia o contador
-        updateSecondsCounter(); 
-        
-        // Atualiza o contador a cada segundo
-        setInterval(updateSecondsCounter, 1000); 
-        
-        // Cria corações aleatórios periodicamente
-        setInterval(createHeartParticle, 3000);
+            setTimeout(() => heart.remove(), 3000);
+        });
+
+        // Inicialização
+        initBackgroundHearts();
+        document.getElementById('date-label').innerText = DATES[currentMode].label;
+        updateTimeCounter();
+        setInterval(updateTimeCounter, 1000); 
     </script>
 </body>
+
 </html>
